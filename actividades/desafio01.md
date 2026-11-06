@@ -1,45 +1,28 @@
-# Desafío 01 — Distribución del tamaño de empresas chilenas
+# Desafío 01 — Exploración de empresas chilenas
 
-## Objetivo
+Esta es una invitación a explorar y conversar. **No hay evaluación, calificación ni entrega formal.** Cada estudiante puede usar las herramientas que prefiera.
 
-Describir cómo se distribuyen las empresas según ventas anuales estimadas por el SII y cómo cambia esa distribución entre años. El trabajo común cubre E01–E02. En la siguiente clase desarrollaremos E03–E06 como continuación guiada, sin anticipar resultados.
+## Los datos
 
-## Datos y acceso
+Las copias de referencia del SII declaran extracción de octubre de 2025 y años comerciales 2005–2024.
 
-La versión de referencia del desafío declara extracción octubre de 2025, años comerciales 2005–2024. Descargar directamente de las fuentes oficiales y comprobar notas y versión:
+- [Datos nacionales por tramos de ventas](../datos/PUB_TRINT.xlsb).
+- [Datos por sector](../datos/PUB_TRINT_RUBR.xlsb).
+- [Procedencia y notas](../datos/README.md).
+- [Presentación breve](../presentacion/Desafio_01_empresas_chilenas.pptx).
 
-- [Página de estadísticas de empresas del SII](https://www.sii.cl/sobre_el_sii/estadisticas_de_empresas.html).
-- [PUB_TRINT.xlsb, nacional por 18 tramos](https://www.sii.cl/sobre_el_sii/empresas/PUB_TRINT.xlsb).
-- [PUB_TRINT_RUBR.xlsb, extensión por rubro](https://www.sii.cl/sobre_el_sii/empresas/PUB_TRINT_RUBR.xlsb).
+Para descargar, abrir el archivo en GitHub y pulsar **Download raw**. El formato XLSB requiere una herramienta compatible. Conservar el original y documentar cualquier conversión de la copia de trabajo. Las hojas Datos y Notas ayudan a interpretar variables y categorías.
 
-Los enlaces pueden actualizarse. Si la extracción difiere, registrar la fecha y consultar antes de combinar versiones. Conservar el original y trabajar sobre una copia. El formato XLSB requiere software compatible. Documentar cualquier conversión a CSV o XLSX.
+## Algunas preguntas para comenzar
 
-Huellas de las copias usadas para preparar el desafío:
+Para 2024: ¿en qué tramos se reúnen más empresas? ¿Cómo se reparten las ventas? ¿Los grupos con más empresas concentran también más ventas?
 
-- Nacional SHA-256: `335318dc6bfb26b7773dde6aca892a501f1e70aae5c636f929c7e17c55b1aa80`.
-- Sectorial SHA-256: `7b3a358e833b29e48bd08fd7cf844bd4440bcc47f9fe923fb5f50903797eab7f`.
+Entre años: pueden comenzar comparando 2005, 2014 y 2024. ¿Qué cambia y qué permanece? Si quieren ampliar, pueden contrastar dos sectores, inicialmente en 2018–2024.
 
-Copias de referencia disponibles en [datos/](../datos/), con procedencia SII y huellas en [manifest.json](../datos/manifest.json). La inclusión de estos archivos no les atribuye una licencia propia del curso.
+Al interpretar: ¿cuál es el denominador de cada porcentaje? ¿Qué significan las ventas no estimables y los valores reservados? ¿Cómo representar tramos de anchuras distintas y una cola sin techo finito?
 
-[Presentación del desafío](../presentacion/Desafio_01_empresas_chilenas.pptx).
+## Para la próxima conversación en clase
 
-## Trabajo común
+Traigan, si pueden, un gráfico o una tabla, un hallazgo que les llame la atención y una pregunta que no pudieron responder. Podemos conversar sobre cómo hicieron el análisis, qué supusieron y qué dificultades encontraron. No hay número mínimo de gráficos, informe obligatorio, formato de entrega ni resultado esperado.
 
-### E01. Año comercial 2024
-
-Identificar la unidad de observación y las unidades monetarias. Revisar Datos y Notas. Elaborar frecuencias por tramo y acumuladas en fronteras. Distinguir proporciones de empresas y participaciones de ventas. Explicitar el tratamiento de ventas no estimables.
-
-### E02. Comparación temporal
-
-Comparar 2005, 2014 y 2024 como cortes sugeridos, ampliables a toda la serie. Mantener fronteras y denominadores comparables. Examinar cambios de cobertura y evitar interpretar los cortes agregados como trayectorias de las mismas empresas.
-
-### Extensión voluntaria
-
-Contrastar dos sectores y justificar su elección, comenzando por 2018–2024. Revisar reserva de información, clasificaciones y comparabilidad. Formular una hipótesis contrastable o proponer cómo evaluar modelos de cola. No es obligatorio ajustar modelos ni ejecutar bootstrap en esta primera entrega.
-
-## Entrega propuesta para la próxima clase
-
-Hasta cuatro páginas, con tres gráficos explicados, una tabla de hallazgos, código o instrucciones reproducibles, registro de observaciones/supuestos/limitaciones y una pregunta pendiente. Indicar archivos, versión, transformaciones, herramientas y uso de IA si corresponde. El docente puede ajustar modalidad y extensión.
-
-Evaluación: comprensión de los datos, coherencia de cálculos y gráficos, respaldo de conclusiones y trazabilidad. No se exige una conclusión predeterminada.
-
+Si usan IA, podemos discutir cómo comprobaron sus respuestas. En clase continuaremos con E03–E06: contraste de modelos, persistencia temporal, sectores y mezclas, sin anticipar conclusiones.
