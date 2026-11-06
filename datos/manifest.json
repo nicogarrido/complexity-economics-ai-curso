@@ -1,0 +1,17 @@
+[
+  {
+    "path": "datos/PUB_TRINT.xlsb",
+    "bytes": 85087,
+    "sha256": "335318dc6bfb26b7773dde6aca892a501f1e70aae5c636f929c7e17c55b1aa80"
+  },
+  {
+    "path": "datos/PUB_TRINT_RUBR.xlsb",
+    "bytes": 1057898,
+    "sha256": "7b3a358e833b29e48bd08fd7cf844bd4440bcc47f9fe923fb5f50903797eab7f"
+  },
+  {
+    "path": "presentacion/Desafio_01_empresas_chilenas.pptx",
+    "bytes": 57646,
+    "sha256": "46efd802e1f8cd0411d2eed7eb1b13d6fa4060785cb9bf8bddc3750832754ed8"
+  }
+]
