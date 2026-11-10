@@ -1,0 +1,196 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laboratorio de mecanismos económicos</title><style>
+:root{font-family:system-ui,sans-serif;color:#18363d;background:#f6f5f0}body{max-width:1180px;margin:auto;padding:28px}h1{font-size:2.3rem;margin-bottom:8px}h2{margin-top:30px}p{line-height:1.5}header{border-bottom:2px solid #176e64;padding-bottom:16px}.controles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}label{display:block;font-weight:600}select,input,button{font:inherit;padding:10px;border:1px solid #839b99;border-radius:4px;background:white;color:inherit}select,input{width:100%;box-sizing:border-box;margin-top:7px}button{cursor:pointer;margin:8px 8px 8px 0}button:hover{background:#d8e9e3}.acciones{margin-top:20px}.indicadores{font-size:1.15rem;background:#e7efeb;padding:14px}canvas{width:100%;height:280px;background:white}.nota{font-size:.9rem;color:#4a6164}table{border-collapse:collapse;width:100%;margin-top:15px}th,td{text-align:left;padding:7px;border-bottom:1px solid #c9d4d1}details{padding:12px 0}summary{cursor:pointer;font-weight:600}.estado{min-height:26px;font-weight:600;color:#166459}@media(max-width:700px){.controles{grid-template-columns:1fr}body{padding:16px}h1{font-size:1.8rem}}@media print{button,.controles{display:none}}
+textarea{width:100%;box-sizing:border-box;font:14px/1.55 ui-monospace,monospace;tab-size:2;padding:16px;background:#fff;color:#18363d;border:1px solid #839b99;resize:vertical}#codigoEstado{font-weight:600}.editor{border:1px solid #b3c8c1;padding:16px;margin-top:24px}.editor summary{font-size:1.2rem}</style><header><p>Explicación y modelización económica con inteligencia artificial</p><h1>Laboratorio de mecanismos económicos</h1><p>20 empresas, 200 clientes, una compra por cliente y período. Cada compra vale una unidad ficticia.</p><p><strong>Resultados simulados. No son datos del SII ni una explicación comprobada de Chile.</strong></p></header>
+<h2>1. Formular una comparación</h2><p>Escribe tu predicción en la ficha antes de ejecutar. Usa la IA para aclarar una regla o cuestionar una interpretación. Este archivo funciona sin internet y no tiene IA incorporada.</p>
+<div class="controles">
+<label>Mecanismo<select id="mecanismo"><option value="azar">A. Elección equiprobable</option><option value="tamano">B. Atracción por tamaño</option><option value="fidelidad">C. Fidelidad al proveedor</option><option value="mixto">D. Tamaño y fidelidad</option></select></label>
+<label>Fidelidad (probabilidad)<input id="lealtad" type="number" min="0" max="1" step="0.1" value="0.9" aria-describedby="ayudaFidelidad"><span id="ayudaFidelidad" class="nota">Se aplica en C y D. En A y B la fidelidad efectiva es 0,00.</span></label>
+<label>Capacidad por empresa<select id="capacidad"><option value="200">200: sin restricción efectiva</option><option value="15">15 compras por período</option><option value="10">10 compras por período</option></select></label>
+<label>Distribución inicial<select id="inicial"><option value="igual">Igual: 10 clientes cada empresa</option><option value="concentrada">Desigual: 100 clientes en empresa 1</option></select></label>
+<label>Semilla aleatoria<input id="semilla" type="number" min="0" max="4294967295" step="1" value="42"></label>
+<label>Períodos por ejecución<input id="periodos" type="number" min="1" max="500" step="1" value="50"></label>
+</div><div class="acciones"><button id="nuevo">Iniciar escenario</button><button id="paso">Avanzar 1 período</button><button id="correr">Ejecutar períodos</button><button id="guardar">Guardar comparación</button><button id="exportar">Descargar registro JSON</button><button id="borrar">Vaciar comparaciones</button></div><p id="estado" class="estado" role="status" aria-live="polite"></p>
+<p id="config" class="nota"></p><p id="metricas" class="indicadores"></p><p class="nota">La capacidad se aplica a partir del período 1. El estado inicial puede excederla. Cambiar un control requiere iniciar un nuevo escenario; no altera una ejecución existente.</p>
+<h2>2. Observar las empresas</h2><canvas id="barras" width="1100" height="280" aria-label="Compras por empresa; valores disponibles en la tabla siguiente"></canvas>
+<details><summary>Datos de las 20 empresas</summary><div id="tabla"></div></details>
+<h2>3. Seguir la distribución</h2><canvas id="serie" width="1100" height="280" aria-label="Participación de la empresa mayor y Gini a lo largo del tiempo; datos completos en el registro descargable"></canvas><p class="nota">Verde: participación de la empresa mayor. Azul: Gini entre empresas. Ambos entre 0 y 1. La identidad de la empresa mayor puede cambiar.</p>
+<details><summary>Primeras ocho decisiones del último período</summary><div id="traza"></div></details>
+<details class="editor" id="editor"><summary>4. Leer y modificar el código del modelo</summary>
+<p>El modelo es una formulación ejecutable de nuestras hipótesis. Puedes editar sus reglas aquí, sin instalar un programa. La interfaz conserva 20 empresas y 200 clientes; comienza modificando la regla de elección.</p>
+<p><strong>Primer experimento:</strong> busca <code>Math.pow(v+1,q.alpha)</code> y cambia <code>v+1</code> por <code>v+5</code>. Con el mecanismo B, ¿qué esperas que ocurra con la ventaja de las empresas grandes? Mantén iguales la semilla, la capacidad y el número de períodos.</p>
+<label for="codigo">Código completo del modelo (JavaScript)</label><textarea id="codigo" rows="25" spellcheck="false" autocapitalize="off"></textarea>
+<button id="aplicarCodigo">Aplicar código e iniciar escenario</button><button id="restaurarCodigo">Restaurar código original</button><button id="descargarCodigo">Descargar código del editor</button>
+<p id="codigoEstado" role="status" aria-live="polite"></p><p class="nota">Aplicar reinicia el escenario; conserva las comparaciones guardadas. Las ediciones pendientes no cambian el modelo activo. El registro JSON incluye el código exacto de cada escenario. Los controles básicos no prueban que el mecanismo sea verdadero ni que el programa esté libre de errores. Recarga la página para volver a la versión original; descarga tus cambios antes de cerrar.</p>
+<p><a href="Actividad_codigo.html">Actividad guiada: de una frase a una regla ejecutable</a></p></details>
+<h2>Comparaciones guardadas</h2><p>Se guardan en esta sesión del navegador. Descarga el registro antes de cerrar.</p><div id="comparaciones"></div>
+<details><summary>Reglas y límites del modelo</summary><p>Al comenzar cada período se congelan las ventas anteriores. Los clientes deciden en orden aleatorio. Con fidelidad activa, conservan su proveedor con la probabilidad elegida, si aún tiene capacidad. En otro caso eligen entre empresas con capacidad disponible.</p><p>Con atracción por tamaño, el peso de una empresa es sus ventas anteriores más uno. Sin atracción, todos los pesos son uno. La probabilidad es el peso dividido por la suma de pesos disponibles. Las compras nuevas no alteran estos pesos dentro del período.</p><p>Las empresas son agentes mínimos: mantienen su identidad, registran ventas y aceptan compras mientras tienen capacidad. Los clientes son agentes que eligen. No hay precios, beneficios, entrada, salida ni aprendizaje. El total de compras permanece en 200. La simulación es un sistema formal delimitado: agregar una condición no la convierte en la economía real ni en un sistema abierto en sentido filosófico.</p><p>Con fidelidad 1 y capacidad 200, la distribución inicial se conserva exactamente. Con capacidad 10, las 20 empresas reciben 10 compras al terminar cada período. Estos son controles para comprobar la implementación.</p></details>
+<script>
+/* Modelo didáctico 1.0. No representa datos ni resultados del SII.
+   Lee primero paso(): allí se encuentran las reglas de interacción. */
+class Mercado {
+  constructor(p = {}) {
+    // Condiciones iniciales y parámetros del experimento.
+    this.p = {
+      n: 20, c: 200, alpha: 0, lealtad: 0, capacidad: 200,
+      inicial: 'igual', semilla: 42, ...p
+    };
+    const q = this.p;
+    if (!Number.isInteger(q.n) || !Number.isInteger(q.c) ||
+        q.n < 2 || q.c < q.n || q.capacidad < Math.ceil(q.c / q.n) ||
+        q.alpha < 0 || q.lealtad < 0 || q.lealtad > 1) {
+      throw Error('Configuración inválida');
+    }
+    this.random = rng(q.semilla);
+    this.t = 0;
+    this.proveedor = Array.from({length: q.c}, (_, j) =>
+      q.inicial === 'concentrada'
+        ? (j < q.c / 2 ? 0 : 1 + (j - Math.ceil(q.c / 2)) % (q.n - 1))
+        : j % q.n
+    );
+    this.ventas = this.contar();
+    this.historia = [this.resumen()];
+    this.traza = [];
+  }
+
+  contar() {
+    const a = Array(this.p.n).fill(0);
+    this.proveedor.forEach(i => a[i]++);
+    return a;
+  }
+
+  paso() {
+    const q = this.p;
+    // Las decisiones usan las ventas del período anterior.
+    const prev = [...this.ventas];
+    const siguiente = Array(q.n).fill(0);
+    const orden = Array.from({length: q.c}, (_, i) => i);
+    // Mezclar el orden de los clientes evita un orden fijo de prioridad.
+    for (let j = orden.length - 1; j > 0; j--) {
+      const k = Math.floor(this.random() * (j + 1));
+      [orden[j], orden[k]] = [orden[k], orden[j]];
+    }
+    this.traza = [];
+    for (const cliente of orden) {
+      const anterior = this.proveedor[cliente];
+      let elegido = -1;
+      let motivo = 'elección ponderada';
+      // Fidelidad: conservar proveedor si todavía tiene capacidad.
+      if (this.random() < q.lealtad && siguiente[anterior] < q.capacidad) {
+        elegido = anterior;
+        motivo = 'fidelidad';
+      } else {
+        // REGLA PARA EXPLORAR: cambia v+1 por v+5.
+        // v: ventas anteriores; alpha: 0 en A/C, 1 en B/D.
+        // Una empresa sin capacidad recibe peso cero.
+        const pesos = prev.map((v, i) =>
+          siguiente[i] < q.capacidad ? Math.pow(v+1,q.alpha) : 0
+        );
+        const total = pesos.reduce((a, b) => a + b, 0);
+        if (total <= 0) throw Error('Sin capacidad');
+        // Sorteo: la probabilidad de cada empresa es su peso / total.
+        let u = this.random() * total;
+        for (let i = 0; i < q.n; i++) {
+          u -= pesos[i];
+          if (u < 0 && pesos[i] > 0) {
+            elegido = i;
+            break;
+          }
+        }
+        if (elegido < 0) elegido = pesos.findLastIndex(w => w > 0);
+      }
+      siguiente[elegido]++;
+      this.proveedor[cliente] = elegido;
+      if (this.traza.length < 8) {
+        this.traza.push({
+          cliente: cliente + 1, antes: anterior + 1,
+          despues: elegido + 1, motivo
+        });
+      }
+    }
+    this.ventas = siguiente;
+    this.t++;
+    this.historia.push(this.resumen());
+    return this.resumen();
+  }
+
+  resumen() {
+    // Indicadores de la distribución, no reglas de comportamiento.
+    const v = this.ventas;
+    const orden = [...v].sort((a, b) => a - b);
+    const n = v.length;
+    const total = v.reduce((a, b) => a + b, 0);
+    return {
+      periodo: this.t, ventas: [...v], mayor: Math.max(...v) / total,
+      gini: orden.reduce((s, x, i) => s + (2 * (i + 1) - n - 1) * x, 0) / (n * total),
+      activos: v.filter(x => x > 0).length
+    };
+  }
+
+  exportar() {
+    return {
+      version: '1.0', naturaleza: 'Simulación didáctica; no son datos SII',
+      parametros: this.p, historia: this.historia,
+      trazaUltimoPeriodo: this.traza
+    };
+  }
+}
+
+// Generador seudoaleatorio: la misma semilla reproduce la misma secuencia.
+// No hace falta modificar esta función para la actividad inicial.
+function rng(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a += 0x6D2B79F5;
+    let t = a;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+if (typeof module !== 'undefined') module.exports = {Mercado};
+
+const codigoOriginal = "/* Modelo didáctico 1.0. No representa datos ni resultados del SII.\n   Lee primero paso(): allí se encuentran las reglas de interacción. */\nclass Mercado {\n  constructor(p = {}) {\n    // Condiciones iniciales y parámetros del experimento.\n    this.p = {\n      n: 20, c: 200, alpha: 0, lealtad: 0, capacidad: 200,\n      inicial: 'igual', semilla: 42, ...p\n    };\n    const q = this.p;\n    if (!Number.isInteger(q.n) || !Number.isInteger(q.c) ||\n        q.n < 2 || q.c < q.n || q.capacidad < Math.ceil(q.c / q.n) ||\n        q.alpha < 0 || q.lealtad < 0 || q.lealtad > 1) {\n      throw Error('Configuración inválida');\n    }\n    this.random = rng(q.semilla);\n    this.t = 0;\n    this.proveedor = Array.from({length: q.c}, (_, j) =>\n      q.inicial === 'concentrada'\n        ? (j < q.c / 2 ? 0 : 1 + (j - Math.ceil(q.c / 2)) % (q.n - 1))\n        : j % q.n\n    );\n    this.ventas = this.contar();\n    this.historia = [this.resumen()];\n    this.traza = [];\n  }\n\n  contar() {\n    const a = Array(this.p.n).fill(0);\n    this.proveedor.forEach(i => a[i]++);\n    return a;\n  }\n\n  paso() {\n    const q = this.p;\n    // Las decisiones usan las ventas del período anterior.\n    const prev = [...this.ventas];\n    const siguiente = Array(q.n).fill(0);\n    const orden = Array.from({length: q.c}, (_, i) => i);\n    // Mezclar el orden de los clientes evita un orden fijo de prioridad.\n    for (let j = orden.length - 1; j > 0; j--) {\n      const k = Math.floor(this.random() * (j + 1));\n      [orden[j], orden[k]] = [orden[k], orden[j]];\n    }\n    this.traza = [];\n    for (const cliente of orden) {\n      const anterior = this.proveedor[cliente];\n      let elegido = -1;\n      let motivo = 'elección ponderada';\n      // Fidelidad: conservar proveedor si todavía tiene capacidad.\n      if (this.random() < q.lealtad && siguiente[anterior] < q.capacidad) {\n        elegido = anterior;\n        motivo = 'fidelidad';\n      } else {\n        // REGLA PARA EXPLORAR: cambia v+1 por v+5.\n        // v: ventas anteriores; alpha: 0 en A/C, 1 en B/D.\n        // Una empresa sin capacidad recibe peso cero.\n        const pesos = prev.map((v, i) =>\n          siguiente[i] < q.capacidad ? Math.pow(v+1,q.alpha) : 0\n        );\n        const total = pesos.reduce((a, b) => a + b, 0);\n        if (total <= 0) throw Error('Sin capacidad');\n        // Sorteo: la probabilidad de cada empresa es su peso / total.\n        let u = this.random() * total;\n        for (let i = 0; i < q.n; i++) {\n          u -= pesos[i];\n          if (u < 0 && pesos[i] > 0) {\n            elegido = i;\n            break;\n          }\n        }\n        if (elegido < 0) elegido = pesos.findLastIndex(w => w > 0);\n      }\n      siguiente[elegido]++;\n      this.proveedor[cliente] = elegido;\n      if (this.traza.length < 8) {\n        this.traza.push({\n          cliente: cliente + 1, antes: anterior + 1,\n          despues: elegido + 1, motivo\n        });\n      }\n    }\n    this.ventas = siguiente;\n    this.t++;\n    this.historia.push(this.resumen());\n    return this.resumen();\n  }\n\n  resumen() {\n    // Indicadores de la distribución, no reglas de comportamiento.\n    const v = this.ventas;\n    const orden = [...v].sort((a, b) => a - b);\n    const n = v.length;\n    const total = v.reduce((a, b) => a + b, 0);\n    return {\n      periodo: this.t, ventas: [...v], mayor: Math.max(...v) / total,\n      gini: orden.reduce((s, x, i) => s + (2 * (i + 1) - n - 1) * x, 0) / (n * total),\n      activos: v.filter(x => x > 0).length\n    };\n  }\n\n  exportar() {\n    return {\n      version: '1.0', naturaleza: 'Simulación didáctica; no son datos SII',\n      parametros: this.p, historia: this.historia,\n      trazaUltimoPeriodo: this.traza\n    };\n  }\n}\n\n// Generador seudoaleatorio: la misma semilla reproduce la misma secuencia.\n// No hace falta modificar esta función para la actividad inicial.\nfunction rng(seed) {\n  let a = seed >>> 0;\n  return () => {\n    a += 0x6D2B79F5;\n    let t = a;\n    t = Math.imul(t ^ t >>> 15, t | 1);\n    t ^= t + Math.imul(t ^ t >>> 7, t | 61);\n    return ((t ^ t >>> 14) >>> 0) / 4294967296;\n  };\n}\nif (typeof module !== 'undefined') module.exports = {Mercado};\n";
+let ModeloActivo=Mercado, codigoActivo=codigoOriginal;
+let mercado,guardados=[];const $=id=>document.getElementById(id),fmt=x=>Number(x).toFixed(3);
+function formatoProbabilidad(valor){return Number(valor).toLocaleString('es-CL',{minimumFractionDigits:2,maximumFractionDigits:8,useGrouping:false});}
+function parametros(){const m=$('mecanismo').value;return{alpha:['tamano','mixto'].includes(m)?1:0,lealtad:['fidelidad','mixto'].includes(m)?Number($('lealtad').value):0,capacidad:Number($('capacidad').value),inicial:$('inicial').value,semilla:Number($('semilla').value)>>>0};}
+function escapar(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function tabla(head,rows){return '<table><thead><tr>'+head.map(x=>'<th>'+escapar(x)+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(x=>'<td>'+escapar(x)+'</td>').join('')+'</tr>').join('')+'</tbody></table>';}
+function dibujar(){const r=mercado.resumen();$('metricas').textContent=`Período ${r.periodo} · Compras totales ${mercado.ventas.reduce((a,b)=>a+b,0)} · Empresas con ventas ${r.activos}/20 · Mayor empresa ${(100*r.mayor).toFixed(1)} % · Gini ${fmt(r.gini)}`;$('config').textContent='Escenario activo: '+JSON.stringify(mercado.p);
+ const c=$('barras'),x=c.getContext('2d');x.clearRect(0,0,c.width,c.height);x.font='15px system-ui';x.fillStyle='#18363d';x.fillText('Compras por empresa (escala fija 0–200)',15,22);for(let i=0;i<20;i++){let h=mercado.ventas[i];x.fillStyle='#176e64';x.fillRect(40+i*52,240-h,30,h);x.fillStyle='#18363d';x.fillText(String(i+1),43+i*52,263);x.fillText(String(h),40+i*52,234-h);}const c2=$('serie'),y=c2.getContext('2d');y.clearRect(0,0,c2.width,c2.height);y.font='15px system-ui';for(const val of [0,.5,1]){y.fillStyle='#334';y.fillText(String(val),4,245-210*val);y.strokeStyle='#ddd';y.beginPath();y.moveTo(35,240-210*val);y.lineTo(1060,240-210*val);y.stroke();}for(const [key,color] of [['mayor','#176e64'],['gini','#416da1']]){y.strokeStyle=color;y.lineWidth=2;y.beginPath();mercado.historia.forEach((r,i)=>{const xx=35+1025*i/Math.max(mercado.t,1),yy=240-210*r[key];i?y.lineTo(xx,yy):y.moveTo(xx,yy)});y.stroke();}y.fillStyle='#18363d';y.fillText('Período 0',35,269);y.fillText('Período '+mercado.t,940,269);$('tabla').innerHTML=tabla(['Empresa','Compras'],mercado.ventas.map((v,i)=>[i+1,v]));$('traza').innerHTML=tabla(['Cliente','Proveedor anterior','Nuevo proveedor','Regla'],mercado.traza.map(t=>[t.cliente,t.antes,t.despues,t.motivo]));}
+function nuevo(){try{mercado=new ModeloActivo(parametros());dibujar();$('estado').textContent='Escenario iniciado. Anota tu predicción antes de avanzar.';}catch(e){$('estado').textContent=e.message;}}
+$('nuevo').onclick=nuevo;$('paso').onclick=()=>{mercado.paso();dibujar();$('estado').textContent='Un período completado.'};$('correr').onclick=()=>{const n=Math.max(1,Math.min(500,Math.floor(Number($('periodos').value)||1)));for(let i=0;i<n;i++)mercado.paso();dibujar();$('estado').textContent=n+' períodos completados.'};$('guardar').onclick=()=>{guardados.push(registro());$('comparaciones').innerHTML=tabla(['Escenario','Código','Tamaño','Fidelidad','Capacidad','Inicio','Semilla','Períodos','Mayor','Gini'],guardados.map((g,i)=>{const r=g.historia.at(-1);return[i+1,g.codigo===codigoOriginal?'Original':'Modificado',g.parametros.alpha,formatoProbabilidad(g.parametros.lealtad),g.parametros.capacidad,g.parametros.inicial,g.parametros.semilla,r.periodo,fmt(r.mayor),fmt(r.gini)]}));$('estado').textContent='Comparación guardada.'};$('borrar').onclick=()=>{guardados=[];$('comparaciones').innerHTML='';$('estado').textContent='Comparaciones vaciadas.'};$('exportar').onclick=()=>{const blob=new Blob([JSON.stringify({actual:registro(),comparaciones:guardados},null,2)],{type:'application/json'}),a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download='registro_experimentos.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};document.querySelectorAll('select,input').forEach(el=>el.addEventListener('change',()=>{$('estado').textContent='Controles cambiados. Pulsa «Iniciar escenario» para aplicarlos.';}));nuevo();
+
+function registro(){return JSON.parse(JSON.stringify({...mercado.exportar(),codigo:codigoActivo,codigoModificado:codigoActivo!==codigoOriginal}));}
+function descargar(texto,nombre,tipo){const url=URL.createObjectURL(new Blob([texto],{type:tipo}));const a=document.createElement('a');a.href=url;a.download=nombre;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function comprobar(m){
+ if(m.p.n!==20||m.p.c!==200)throw Error('Esta interfaz requiere 20 empresas y 200 clientes.');
+ if(!Array.isArray(m.ventas)||m.ventas.length!==20||m.ventas.some(v=>!Number.isInteger(v)||v<0)||m.ventas.reduce((a,b)=>a+b,0)!==200)throw Error('Se requieren 200 compras no negativas repartidas entre 20 empresas.');
+ const r=m.resumen();if(!Number.isFinite(r.gini)||!Number.isFinite(r.mayor))throw Error('Los indicadores deben ser números finitos.');
+ for(const metodo of ['paso','resumen','exportar'])if(typeof m[metodo]!=='function')throw Error('Falta el método '+metodo);
+}
+function aplicar(fuente){
+ try{
+  const Candidato=new Function('"use strict";\n'+fuente+'\nreturn Mercado;')();
+  const prueba=new Candidato(parametros());comprobar(prueba);prueba.paso();comprobar(prueba);
+  const candidato=new Candidato(parametros());comprobar(candidato);
+  const anterior={mercado,ModeloActivo,codigoActivo};
+  try{mercado=candidato;ModeloActivo=Candidato;codigoActivo=fuente;dibujar();}
+  catch(error){({mercado,ModeloActivo,codigoActivo}=anterior);dibujar();throw error;}
+  $('codigoEstado').textContent=(fuente===codigoOriginal?'Código original':'Código modificado')+' activo. Escenario reiniciado en el período 0.';
+  $('estado').textContent='Escribe tu predicción y ejecuta los mismos períodos que en la comparación original.';
+ }catch(error){$('codigoEstado').textContent='No se aplicaron los cambios: '+error.message;}
+}
+$('codigo').value=codigoOriginal;
+$('codigoEstado').textContent='Código original activo.';
+$('codigo').addEventListener('input',()=>{$('codigoEstado').textContent='Hay cambios pendientes. Pulsa «Aplicar código» para ejecutarlos.';});
+$('aplicarCodigo').onclick=()=>aplicar($('codigo').value);
+$('restaurarCodigo').onclick=()=>{$('codigo').value=codigoOriginal;aplicar(codigoOriginal);};
+$('descargarCodigo').onclick=()=>descargar($('codigo').value,'modelo_editado.js','text/javascript');
+// Reportar errores de ejecución también después de aplicar una edición.
+for(const id of ['paso','correr','guardar','exportar']){
+ const accion=$(id).onclick;
+ $(id).onclick=()=>{try{accion();comprobar(mercado);}catch(error){$('estado').textContent='La ejecución se detuvo: '+error.message+'. Revisa el código o restaura el original.';}};
+}
+
+</script></html>
