@@ -20,13 +20,13 @@ ________________________________________________________________
 
 ## Actividad con IA-1
 
-Descarga datos/Datos_SII_2024.csv del repositorio del curso y súbelo o pégalo en tu asistente. Pide a la IA que reproduzca el 74,2 % y comprueba su cálculo a mano o con calculadora. Redacta una observación comprobable, una interpretación posible y una afirmación que estos datos no permiten sostener. Pregunta a la IA qué falta, pero no aceptes cifras nuevas sin fuente.
+Abre Datos_SII_2024.csv (carpeta estudiantes) y súbelo o pégalo en tu asistente. Pide a la IA que reproduzca el 74,2 % y comprueba su cálculo a mano o con calculadora. Redacta una observación comprobable, una interpretación posible y una afirmación que estos datos no permiten sostener. Pregunta a la IA qué falta, pero no aceptes cifras nuevas sin fuente.
 
 ## Registro
 
 Observación: ____________________________________________________
 Interpretación: __________________________________________________
-Lo que la tabla no muestra (lo retomaremos en F7): ____________________
+Una relación concreta que la tabla no muestra (lo retomaremos en F7): ______
 Denominador y unidad: ____________________________________________
 
 ## Marco de investigación
@@ -40,7 +40,7 @@ Decisión del grupo y verificación: __________________________________
 
 ## Fuente
 
-Extracto: datos/Datos_SII_2024.csv en https://github.com/nicogarrido/complexity-economics-ai-curso. Original: PUB_TRINT.xlsb, hoja Datos, filas 348–365 y hoja Notas (misma carpeta). https://www.sii.cl/sobre_el_sii/estadisticas_de_empresas.html
+Extracto: Datos_SII_2024.csv. Original: PUB_TRINT.xlsb, hoja Datos, filas 348–365 y hoja Notas. https://www.sii.cl/sobre_el_sii/estadisticas_de_empresas.html
 
 # F2 · De la frase a la regla
 
@@ -52,18 +52,20 @@ Reconocimiento: «los clientes eligen empresas conocidas». Vínculo: «los clie
 
 Identifica qué deja abierto cada frase: ¿conocidas por quién y en qué medida?, ¿el vínculo se mantiene siempre?, ¿qué ocurre si el proveedor no puede atender? Después formula cada explicación como un mecanismo y propón la regla que decidiría esas preguntas. No pidas a la IA que elija la verdadera sin evidencia. En el núcleo, desarrolla una explicación y resume la otra en una frase.
 
+Explicación elegida (marca una): ☐ reconocimiento ☐ vínculo
+
 ## Explicación 1 · reconocimiento
 
 Qué deja abierto la frase: ______________________________________
 Regla propuesta: _______________________________________________
-Condiciones necesarias: __________________________________________
+Condiciones en la economía (no en el modelo): __________________________
 Evidencia que la debilitaría: _______________________________________
 
 ## Explicación 2 · vínculo
 
 Qué deja abierto la frase: ______________________________________
 Regla propuesta: _______________________________________________
-Condiciones necesarias: __________________________________________
+Condiciones en la economía (no en el modelo): __________________________
 Evidencia que la debilitaría: _______________________________________
 
 ## Comparar con el simulador

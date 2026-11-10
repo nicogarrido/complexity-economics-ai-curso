@@ -1,0 +1,52 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Actividad de código</title><style>
+:root{--bg:#f4efe7;--panel:#fbf8f3;--tx:#2f2a27;--mu:#6d6560;--ac:#792f40;--ln:#dcd3c8;--btx:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#1f1b19;--panel:#2a2522;--tx:#ece5dd;--mu:#b3a99f;--ac:#d98ea0;--ln:#433b36;--btx:#1f1b19}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.6 Georgia,'Times New Roman',serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 80px}
+h1{font-weight:normal;font-size:clamp(28px,5vw,40px);line-height:1.15;margin:0 0 8px}
+h2{font-weight:normal;color:var(--ac);font-size:24px;margin:48px 0 4px}
+h3{font-weight:normal;font-size:20px;margin:2px 0 6px}
+p{margin:0 0 12px}.sub{color:var(--mu);font-size:18px}
+a{color:var(--ac)}
+nav.top{display:flex;flex-wrap:wrap;gap:8px 18px;margin:20px 0 8px;font-size:15px}
+.act{background:var(--panel);border:1px solid var(--ln);border-radius:6px;padding:18px 20px;margin:14px 0}
+.meta{font:13px/1.4 system-ui,sans-serif;color:var(--mu);letter-spacing:.02em;text-transform:uppercase}
+.acciones{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{display:inline-block;font:15px/1 system-ui,sans-serif;padding:10px 14px;border-radius:4px;border:1px solid var(--ac);color:var(--ac);background:transparent;text-decoration:none;cursor:pointer}
+.btn.prim{background:var(--ac);color:var(--btx)}
+details{margin-top:10px;border-top:1px solid var(--ln);padding-top:8px}
+summary{cursor:pointer;font:15px system-ui,sans-serif;color:var(--mu)}
+.prompt{white-space:pre-wrap;font:15px/1.55 system-ui,sans-serif;background:var(--bg);padding:12px;border-radius:4px;margin:8px 0}
+.nota{border-left:3px solid var(--ac);padding-left:14px;color:var(--mu)}
+table{border-collapse:collapse;width:100%;font:15px system-ui,sans-serif;margin:12px 0;display:block;overflow-x:auto}
+th,td{border-bottom:1px solid var(--ln);padding:6px 8px;text-align:left}td:last-child,th:last-child{text-align:right}
+code{font-size:15px;background:var(--panel);padding:1px 4px;border-radius:3px}
+footer{margin-top:56px;color:var(--mu);font-size:14px}
+</style></head><body><main><p><a href="index.html">← Volver al inicio</a></p><h1>Actividad: ¿de qué depende el resultado?</h1>
+<p>Duración: 15 minutos, del minuto 70 al 85 de la segunda clase (20 minutos en la versión de 150). Trabajen en parejas. No se necesita experiencia de programación.</p>
+<h2>Para qué sirve</h2>
+<p>Acumular conocimiento no consiste en agregar reglas. Consiste en conservar formulaciones explícitas, saber qué resultados dependen de ellas y poder revisar una explicación sin perder lo aprendido. En esta actividad revisamos un supuesto auxiliar de la regla de reconocimiento: el +1.</p>
+<h2>Hipótesis en palabras</h2>
+<p>Los clientes eligen empresas conocidas, pero todas tienen una visibilidad de base. ¿Cómo cambia el resultado si aumenta esa base?</p>
+<ol><li>Selecciona B, inicio igual, capacidad 200, la semilla de tu grupo (42, 43 o 44) y 50 períodos. Inicia, ejecuta y guarda la comparación original.</li><li>Abre «Leer y modificar el código». Pide a la IA: «Explícame Math.pow(v+1,q.alpha): qué representan v y alpha, cómo se convierte el peso en probabilidad y qué cambiaría con v+5. No ejecutes ni inventes resultados. Ayúdame a formular una predicción».</li><li>Escribe tu predicción. Cambia solo <code>Math.pow(v+1,q.alpha)</code> por <code>Math.pow(v+5,q.alpha)</code>. Aplica el código; el escenario vuelve al período 0.</li><li>Ejecuta 50 períodos con las mismas condiciones y guarda la nueva comparación. Examina Gini, empresa mayor y trayectoria. Compartan los resultados entre grupos.</li><li>Descarga el registro JSON: conserva el código de cada escenario.</li></ol>
+<h2>Qué significa la modificación</h2>
+<p>Con B, el peso original es v+1 y el modificado v+5. Para empresas con ventas 10 y 20, los pesos pasan de 11 y 21 a 15 y 25: disminuye la ventaja relativa de la mayor. Esto sugiere una hipótesis sobre la distribución; no garantiza cada resultado aleatorio. Con A, alpha es cero y ambos pesos son uno: sirve como control. La semilla igual facilita reproducir, pero no sustituye varias repeticiones.</p>
+<h2>Acumular: qué conservamos y qué revisamos</h2>
+<p>Qué resultado depende del supuesto +1: ________________________________</p>
+<p>¿Es un supuesto del mecanismo o un detalle de implementación? ___________</p>
+<p>A la luz de E2, ¿hace falta el reconocimiento para explicar la persistencia de la desigualdad, o podríamos retirar ese mecanismo o simplificar el modelo? ________________________________</p>
+<h2>Discusión desde el realismo trascendental</h2>
+<p>La regla formaliza un mecanismo hipotético. Un cambio en la distribución simulada demuestra una consecuencia dentro del modelo, no la existencia de ese mecanismo en Chile. ¿Qué evidencia independiente permitiría evaluar la visibilidad de base? ¿Qué condiciones podrían impedir que opere?</p>
+<h2>Si aparece un error</h2>
+<p>Lee el mensaje, pide a la IA que explique la causa y revisa el cambio. Puedes restaurar el original. Aplicar comprueba un período y la estructura básica de las compras; esas comprobaciones son parciales. Mantén el nombre Mercado y sus métodos; la interfaz está diseñada para 20 empresas y 200 clientes.</p><p class="acciones"><a class="btn prim" href="simulador/Simulador.html">Abrir el simulador</a> <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeBiTjihkV6vMACCPG7iBxSZyrtN4cRu9wFSycRpIcIMcCBTA/viewform" target="_blank" rel="noopener">Responder (Código)</a></p><footer>Explicación y modelización económica con inteligencia artificial</footer></main>
+<script>
+document.querySelectorAll('[data-copiar]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=document.getElementById(b.dataset.copiar).textContent;
+    var ok=function(){var o=b.textContent;b.textContent='Copiada';setTimeout(function(){b.textContent=o},1500)};
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(ok,function(){})}
+  });
+});
+</script>
+</body></html>
