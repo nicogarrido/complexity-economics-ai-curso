@@ -1,6 +1,6 @@
 # Actividad: ¿de qué depende el resultado?
 
-Duración: 15 minutos, del minuto 70 al 85 de la segunda clase (20 minutos en la versión de 150). Trabajen en parejas. No se necesita experiencia de programación.
+Duración: 15 minutos, del minuto 70 al 85 de la segunda clase (20 minutos en la versión de 150). Trabajo individual. No se necesita experiencia de programación.
 
 ## Para qué sirve
 Acumular conocimiento no consiste en agregar reglas. Consiste en conservar formulaciones explícitas, saber qué resultados dependen de ellas y poder revisar una explicación sin perder lo aprendido. En esta actividad revisamos un supuesto auxiliar de la regla de reconocimiento: el +1.
@@ -8,10 +8,10 @@ Acumular conocimiento no consiste en agregar reglas. Consiste en conservar formu
 ## Hipótesis en palabras
 Los clientes eligen empresas conocidas, pero todas tienen una visibilidad de base. ¿Cómo cambia el resultado si aumenta esa base?
 
-1. Selecciona B, inicio igual, capacidad 200, la semilla de tu grupo (42, 43 o 44) y 50 períodos. Inicia, ejecuta y guarda la comparación original.
+1. Selecciona B, inicio igual, capacidad 200, tu semilla (42, 43 o 44) y 50 períodos. Inicia, ejecuta y guarda la comparación original.
 2. Abre «Leer y modificar el código». Pide a la IA: «Explícame Math.pow(v+1,q.alpha): qué representan v y alpha, cómo se convierte el peso en probabilidad y qué cambiaría con v+5. No ejecutes ni inventes resultados. Ayúdame a formular una predicción».
 3. Escribe tu predicción. Cambia solo `Math.pow(v+1,q.alpha)` por `Math.pow(v+5,q.alpha)`. Aplica el código; el escenario vuelve al período 0.
-4. Ejecuta 50 períodos con las mismas condiciones y guarda la nueva comparación. Examina Gini, empresa mayor y trayectoria. Compartan los resultados entre grupos.
+4. Ejecuta 50 períodos con las mismas condiciones y guarda la nueva comparación. Examina Gini, empresa mayor y trayectoria. Compartan los resultados en el curso.
 5. Descarga el registro JSON: conserva el código de cada escenario.
 
 ## Qué significa la modificación

@@ -36,4 +36,4 @@ Quiero investigar reconocimiento, vínculo y su posible interacción. El SII usa
 Voy a pegar nuestro argumento. Localiza una afirmación que exceda la evidencia, un supuesto importante y una alternativa omitida. Comprueba que distinguimos mecanismo propuesto y real. Formula dos preguntas para que revisemos nosotros. No reescribas todo ni añadas resultados.
 
 ## Registro mínimo
-Actividad / herramienta y fecha / sugerencia de IA / decisión del grupo / comprobación propia. Una captura o el texto pertinente basta. La seguridad de la respuesta de IA no es una verificación.
+Actividad / herramienta y fecha / sugerencia de IA / decisión propia / comprobación propia. Una captura o el texto pertinente basta. La seguridad de la respuesta de IA no es una verificación.

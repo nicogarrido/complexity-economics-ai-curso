@@ -10,7 +10,7 @@ SII, año comercial 2024. Empresas con ventas positivas estimadas: 1.226.386. De
 
 ## Identificación
 
-Grupo: __________________ Integrantes: __________________ Fecha: __________
+Nombre: __________________ Fecha: __________
 
 ## Pregunta de apertura
 
@@ -36,7 +36,7 @@ Denominador y unidad: ____________________________________________
 ## Uso de IA
 
 Propuesta de la IA: ______________________________________________
-Decisión del grupo y verificación: __________________________________
+Tu decisión y verificación: __________________________________
 
 ## Fuente
 
@@ -79,7 +79,7 @@ ________________________________________________________________
 
 ## Uso de IA
 
-Qué aceptamos: __________________ Qué cambiamos: __________________
+Qué aceptaste: __________________ Qué cambiaste: __________________
 Por qué: ________________________________________________________
 
 # F3 · Anatomía de un modelo de agentes
@@ -154,7 +154,7 @@ Qué resultado la pondría en duda: __________________________________
 
 ## E1 obligatorio
 
-A frente a B. Inicio igual. Capacidad 200. 50 períodos. Semillas 42, 43, 44. A no usa tamaño ni fidelidad. B usa tamaño, sin fidelidad. Cambiar solo el mecanismo. Pulsar Iniciar escenario después de modificar controles. Cada grupo puede asumir una semilla y compartir sus resultados; no es necesario que todos ejecuten las seis combinaciones.
+A frente a B. Inicio igual. Capacidad 200. 50 períodos. Semillas 42, 43, 44. A no usa tamaño ni fidelidad. B usa tamaño, sin fidelidad. Cambiar solo el mecanismo. Pulsar Iniciar escenario después de modificar controles. Cada estudiante usa una semilla y comparte sus resultados; no es necesario que todos ejecuten las seis combinaciones.
 
 ## Registro de resultados
 
@@ -185,7 +185,7 @@ Cada explicación alternativa es un cambio identificable del modelo: cambiar una
 
 ## E2 · Confrontar: ¿producir o conservar? (núcleo)
 
-A, B y C desde el inicio concentrado (la empresa 1 parte con el 50 % de las compras). Capacidad 200, 50 períodos. En C, fidelidad 0,9. Una semilla por grupo (42, 43 o 44); compartan resultados. Predice antes de ejecutar.
+A, B y C desde el inicio concentrado (la empresa 1 parte con el 50 % de las compras). Capacidad 200, 50 períodos. En C, fidelidad 0,9. Una semilla por estudiante (42, 43 o 44); compartan resultados. Predice antes de ejecutar.
 
 Escenario / semilla / mayor empresa al inicio / mayor empresa final / Gini final
 A / ____ / 50 % / __________ / __________
@@ -221,7 +221,7 @@ Respaldo: ¿qué evidencia sostendría la combinación? _____________________
 ## Discusión con IA-6 e IA-6b
 
 Propuesta de la IA: ______________________________________________
-Decisión del grupo y verificación: __________________________________
+Tu decisión y verificación: __________________________________
 
 ## Extensión opcional: E3, una condición institucional
 
@@ -261,23 +261,23 @@ Otra explicación que habría que considerar: _________________________
 ## Revisión
 
 Propuesta de la IA: ______________________________________________
-Corrección del grupo: _____________________________________________
+Tu corrección: _____________________________________________
 
 # F8 · Contribución y revisión colectiva
 
 ## Entrega
 
-Una conclusión de seis frases por grupo, más registro JSON con el código usado y ficha F3. Una frase por punto de la estructura siguiente. No se exige programar de forma autónoma.
+Una conclusión individual de seis frases, más registro JSON con el código usado y ficha F3. Una frase por punto de la estructura siguiente. No se exige programar de forma autónoma.
 
 ## Estructura
 
 1. Fenómeno y población. 2. Explicación y condiciones. 3. Reglas que la formulan y lo que deciden. 4. Alternativa o combinación ejecutada y resultado. 5. Qué aporta, qué contradice y qué evidencia falta. 6. Qué conservaríamos, qué revisaríamos y qué aportó la IA.
 
-## Revisión con IA-9 y otro grupo
+## Revisión con IA-9 y un compañero
 
 Afirmación central: _______________________________________________
 Objeción recibida: ________________________________________________
-Qué cambiamos y por qué: _________________________________________
+Qué cambiaste y por qué: _________________________________________
 
 ## Criterios
 
